@@ -5,17 +5,20 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def get_plotbox(name, data):
-    sns.boxplot(data=data, orient='h')
-    print(max(data))
+def get_plotbox(name):
+    df = pd.read_csv('jfreechart-stats.csv')
+    if(name != 'WMC'):
+        sns.boxplot(data=df[' ' + name], orient='h')
+    else:
+        sns.boxplot(data=df[name], orient='h')
     plt.savefig('' + name + '.png')
 
 
 def main():
-    df = pd.read_csv('jfreechart-stats.csv')
-    print(df.head())
-    print(df.keys())
-    get_plotbox('WMC', df['WMC'])
+    get_plotbox('NCLOC')
+    get_plotbox('DCP')
+    get_plotbox('NOCom')
+    get_plotbox('WMC')
 
 
 if __name__ == "__main__":
